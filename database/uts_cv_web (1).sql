@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 16, 2025 at 01:41 AM
+-- Generation Time: Nov 16, 2025 at 12:31 PM
 -- Server version: 11.7.2-MariaDB-log
 -- PHP Version: 8.1.10
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `uts_cv_web`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `certificates`
+--
+
+CREATE TABLE `certificates` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `issuer` varchar(100) DEFAULT NULL,
+  `issue_date` date DEFAULT NULL,
+  `image_filename` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `certificates`
+--
+
+INSERT INTO `certificates` (`id`, `title`, `issuer`, `issue_date`, `image_filename`) VALUES
+(1, 'Belajar Dasar AI', 'Dicoding', '2025-09-07', 'sertifikat_dicodingAI.jpg');
 
 -- --------------------------------------------------------
 
@@ -63,30 +84,8 @@ CREATE TABLE `experience` (
 --
 
 INSERT INTO `experience` (`id`, `company_name`, `role`, `description`, `start_date`, `end_date`) VALUES
-(1, 'PT. Astra Internasional', 'Cyber Security', 'Berfokus pada pengembangan kemampuan di bidang keamanan siber dan perlindungan data. Aktif mempelajari sistem keamanan jaringan serta cara mendeteksi kerentanan dalam sistem informasi.', 'Jan 2024', 'Apr 2025'),
-(2, 'PT Traveloka Tbk', 'Cyber Security', 'Sedang mempelajari dasar-dasar keamanan siber, termasuk pengenalan ancaman siber, enkripsi data, dan keamanan jaringan. Tertarik mengembangkan kemampuan dalam mendeteksi, mencegah, dan mengatasi potensi serangan digital melalui pembelajaran dan praktik langsung.', ' Apr 2025', 'Sekarang');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `organization`
---
-
-CREATE TABLE `organization` (
-  `id` int(11) NOT NULL,
-  `org_name` varchar(100) DEFAULT NULL,
-  `role` varchar(100) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `start_year` char(4) DEFAULT NULL,
-  `end_year` char(4) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `organization`
---
-
-INSERT INTO `organization` (`id`, `org_name`, `role`, `description`, `start_year`, `end_year`) VALUES
-(1, 'Himpunan Mahasiswa Teknik Informatika', 'Anggota PSDM', 'Sebagai anggota divisi PSDM, saya berperan dalam mengelola dan mengembangkan potensi anggota organisasi melalui berbagai program pelatihan, evaluasi, dan kegiatan internal. Saya turut berkontribusi dalam menjaga semangat, solidaritas, serta peningkatan kualitas sumber daya manusia di dalam organisasi.', '2024', '2025');
+(1, 'Anggota PSDM Himpunan Mahasiswa Teknik Informatika', 'Organisasi', 'Sebagai anggota divisi PSDM, saya berperan dalam mengelola dan mengembangkan potensi anggota organisasi melalui berbagai program pelatihan, evaluasi, dan kegiatan internal. Saya turut berkontribusi dalam menjaga semangat, solidaritas, serta peningkatan kualitas sumber daya manusia di dalam organisasi.', 'Mar 2024', 'Agust 2025'),
+(2, 'Mengikuti Kelas Belajar Dasar AI', 'dicoding', 'Mengikuti kelas Belajar Dasar AI di Dicoding untuk memahami konsep dasar kecerdasan buatan, termasuk machine learning, data processing, serta penerapan model AI sederhana. Mempelajari teori dasar dan praktik penerapan AI menggunakan contoh kasus nyata sebagai landasan untuk pengembangan kemampuan di bidang teknologi cerdas.', 'Nov 07', '');
 
 -- --------------------------------------------------------
 
@@ -144,6 +143,12 @@ INSERT INTO `skills` (`id`, `skill_name`, `category`, `percentage`, `level_text`
 --
 
 --
+-- Indexes for table `certificates`
+--
+ALTER TABLE `certificates`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `education`
 --
 ALTER TABLE `education`
@@ -153,12 +158,6 @@ ALTER TABLE `education`
 -- Indexes for table `experience`
 --
 ALTER TABLE `experience`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `organization`
---
-ALTER TABLE `organization`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -178,6 +177,12 @@ ALTER TABLE `skills`
 --
 
 --
+-- AUTO_INCREMENT for table `certificates`
+--
+ALTER TABLE `certificates`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `education`
 --
 ALTER TABLE `education`
@@ -188,12 +193,6 @@ ALTER TABLE `education`
 --
 ALTER TABLE `experience`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `organization`
---
-ALTER TABLE `organization`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `personal_data`

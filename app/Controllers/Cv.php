@@ -6,8 +6,8 @@ namespace App\Controllers;
 use App\Models\PersonalDataModel;
 use App\Models\EducationModel;
 use App\Models\ExperienceModel;
-use App\Models\OrganizationModel; // <-- TAMBAHKAN INI
-use App\Models\SkillsModel;       // <-- TAMBAHKAN INI
+use App\Models\SkillsModel;
+use App\Models\CertificateModel; // <-- TAMBAHKAN INI
 
 class Cv extends BaseController
 {
@@ -17,8 +17,8 @@ class Cv extends BaseController
         $personalModel = new PersonalDataModel();
         $educationModel = new EducationModel();
         $experienceModel = new ExperienceModel();
-        $organizationModel = new OrganizationModel(); // <-- TAMBAHKAN INI
-        $skillsModel = new SkillsModel();             // <-- TAMBAHKAN INI
+        $skillsModel = new SkillsModel();
+        $certificateModel = new CertificateModel(); // <-- TAMBAHKAN INI
 
         // Ambil data skill dan kelompokkan berdasarkan kategori
         $allSkills = $skillsModel->findAll();
@@ -30,14 +30,10 @@ class Cv extends BaseController
         // Siapkan data untuk dikirim ke view
         $data = [
             'personal' => $personalModel->first(),
-            
             'education' => $educationModel->orderBy('end_year', 'DESC')->findAll(),
-            
             'experience' => $experienceModel->orderBy('start_date', 'DESC')->findAll(),
-            
-            // <-- TAMBAHKAN 2 BARIS INI -->
-            'organizations' => $organizationModel->orderBy('start_year', 'DESC')->findAll(),
-            'skills_grouped' => $groupedSkills
+            'skills_grouped' => $groupedSkills,
+            'certificates' => $certificateModel->findAll() // <-- TAMBAHKAN INI
         ];
 
         // Kirim data ke view 'cv_view'

@@ -680,6 +680,54 @@
         body.light-mode footer {
             background-color: var(--dark-bg-2);
         }
+
+        /* ============================== */
+/* CSS UNTUK KARTU PORTOFOLIO     */
+/* ============================== */
+.portfolio-card {
+    background-color: var(--dark-bg-2);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    margin-bottom: 30px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+.portfolio-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+.portfolio-card-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+.portfolio-card-body {
+    padding: 20px 25px;
+}
+.portfolio-card-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--heading-color-light);
+    margin-bottom: 5px;
+}
+.portfolio-card-issuer {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+/* CSS untuk subtitle (deskripsi) section */
+.section-subtitle {
+    color: var(--secondary-text); 
+    text-align: center; 
+    max-width: 600px; 
+    margin: 0 auto 50px auto;
+}
     </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#cv-navbar" data-bs-offset="100">
@@ -702,11 +750,10 @@
                 <a class="nav-link" href="#pengalaman">Pengalaman</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#organisasi">Organisasi</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="#keahlian">Keahlian</a>
             </li>
+            <li><a class="nav-link" href="#portofolio">Portofolio</a>
+            </li> 
         </ul>
         
         <div class="theme-switcher" id="theme-toggle">
@@ -729,7 +776,7 @@
                 <p class="hero-greeting">Halo, saya</p>
                 <h1><?= $personal['full_name'] ?? 'Mochammad Bimo Ibrahim' ?></h1>
                 
-                <p class="lead"><?= $personal['job_title'] ?? 'Cyber Security | Mahasiswa TI' ?></p>
+                <p class="lead"><?= $personal['job_title'] ?? 'Mahasiswa TI | dengan keahlian dalam pengelolaan database SQL dan pemahaman dasar keamanan siber. Terbiasa bekerja dengan MySQL dan mempelajari praktik keamanan jaringan untuk menjaga integritas serta keamanan data.' ?></p>
                 
                 <div class="contact-links">
                     <a href="mailto:<?= $personal['bimoibr159@gmail.com'] ?? '' ?>" class="btn btn-primary"><i class="bi bi-envelope"></i> Email</a>
@@ -793,25 +840,6 @@
             </ul>
         </section>
 
-        <section id="organisasi" class="py-5 section">
-            <h2 class="section-title">Organisasi</h2>
-
-            <ul class="timeline">
-                <?php if (!empty($organizations)): ?>
-                    <?php foreach ($organizations as $org): ?>
-                        <li class="timeline-item">
-                            <div class="timeline-date"><?= $org['start_year'] ?? 'Tahun Mulai' ?> - <?= $org['end_year'] ?? 'Tahun Selesai' ?></div>
-                            <h5 class="timeline-title"><?= $org['role'] ?? 'Posisi Anda' ?></h5>
-                            <h6 class="timeline-company"><?= $org['org_name'] ?? 'Nama Organisasi' ?></h6>
-                            <p><?= $org['description'] ?? 'Deskripsi tugas Anda.' ?></p>
-                        </li>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>Data organisasi belum ditambahkan.</p>
-                <?php endif; ?>
-            </ul>
-        </section>
-
         <section id="keahlian" class="py-5 section">
             <h2 class="section-title">Keahlian</h2>
             
@@ -862,6 +890,33 @@
                 <?php endif; ?>
             </div>
         </section>
+
+        <section id="portofolio" class="py-5 section">
+    <h2 class="section-title">Portofolio</h2>
+    <p class="section-subtitle">
+        Beberapa pencapaian dan sertifikasi yang telah saya peroleh.
+    </p>
+    
+    <div class="row">
+        <?php if (!empty($certificates)): ?>
+            <?php foreach ($certificates as $index => $cert): ?>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="portfolio-card" style="animation-delay: <?= $index * 100 ?>ms">
+                        <a href="<?= base_url('img/sertifikat/' . $cert['image_filename']) ?>" target="_blank" title="Lihat ukuran penuh">
+                            <img src="<?= base_url('img/sertifikat/' . $cert['image_filename']) ?>" class="portfolio-card-img" alt="<?= htmlspecialchars($cert['title']) ?>">
+                        </a>
+                        <div class="portfolio-card-body">
+                            <h5 class="portfolio-card-title"><?= htmlspecialchars($cert['title']) ?></h5>
+                            <p class="portfolio-card-issuer"><?= htmlspecialchars($cert['issuer']) ?></p>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+        <?php else: ?>
+            <p style="color: var(--secondary-text); text-align: center;">Belum ada portofolio untuk ditampilkan.</p>
+        <?php endif; ?>
+    </div> </section>
 
     </div> <footer class="text-center p-4 mt-5">
         <p class="mb-0">&copy; <?= date('Y') ?> <?= $personal['full_name'] ?? '' ?></p>
